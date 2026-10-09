@@ -1,0 +1,46 @@
+gateway:
+  image: { repository: api-gateway, tag: "0.1.0", pullPolicy: IfNotPresent }
+  replicas: 1                      # ignored once the HPA is enabled
+  service: { type: NodePort, port: 8000, nodePort: 30080 }
+  resources:
+    requests: { cpu: 50m,  memory: 96Mi }
+    limits:   { cpu: 250m, memory: 192Mi }
+  hpa:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 4
+    targetCPUUtilizationPercentage: 60
+
+catalogue:
+  image: { repository: catalogue-service, tag: "0.1.0", pullPolicy: IfNotPresent }
+  replicas: 1
+  service: { type: ClusterIP, port: 8000 }
+  resources:
+    requests: { cpu: 100m, memory: 128Mi }
+    limits:   { cpu: 500m, memory: 256Mi }
+  hpa:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 6
+    targetCPUUtilizationPercentage: 50
+    scaleUpStabilizationSeconds: 0
+    scaleDownStabilizationSeconds: 60   # k8s default is 300; shortened so the demo shows scale-down
+
+postgres:
+  image: { repository: postgres, tag: "16-alpine", pullPolicy: IfNotPresent }
+  database: catalogue
+  user: catalogue
+  # Leave empty: a random password is generated once and reused on upgrades (see templates/secret.yaml).
+  password: ""
+  persistence: { size: 1Gi, storageClassName: "" }
+  resources:
+    requests: { cpu: 100m, memory: 256Mi }
+    limits:   { cpu: 500m, memory: 512Mi }
+
+monitoring:
+  # Requires the ServiceMonitor CRD from kube-prometheus-stack (install monitoring first).
+  serviceMonitor:
+    enabled: true
+    interval: 15s
+    # kube-prometheus-stack only selects ServiceMonitors carrying its release label.
+    releaseLabel: kube-prometheus-stack

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: catalogue-app
+description: API Gateway + Catalogue Service + PostgreSQL with CPU-based HPA
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
