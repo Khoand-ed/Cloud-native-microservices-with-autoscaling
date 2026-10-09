@@ -1,0 +1,48 @@
+# Local, Kubernetes-free run of the 3 components. Usage:
+#   cp .env.example .env   (then edit the password)
+#   docker compose up --build
+# Gateway: http://localhost:8080   Catalogue (direct): http://localhost:8001
+name: cloud-native-autoscaling
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-catalogue}
+      POSTGRES_USER: ${POSTGRES_USER:-catalogue}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?copy .env.example to .env and set POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./charts/catalogue-app/files/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  catalogue:
+    build: ./services/catalogue
+    image: catalogue-service:dev
+    environment:
+      DB_HOST: db
+      DB_NAME: ${POSTGRES_DB:-catalogue}
+      DB_USER: ${POSTGRES_USER:-catalogue}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8001:8000"
+
+  gateway:
+    build: ./services/gateway
+    image: api-gateway:dev
+    environment:
+      CATALOGUE_URL: http://catalogue:8000
+    depends_on:
+      - catalogue
+    ports:
+      - "8080:8000"
+
+volumes:
+  pgdata:
