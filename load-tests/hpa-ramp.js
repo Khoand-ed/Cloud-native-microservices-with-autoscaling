@@ -2,17 +2,17 @@
 // holds it long enough to watch scale-out, then drops to a trickle to watch scale-in.
 //
 // Run:  k6 run load-tests/hpa-ramp.js
-// Tunables (env):  BASE_URL, PEAK_VUS (default 25), STRESS_MS (CPU burned per heavy request, default 25),
+// Tunables (env):  BASE_URL, PEAK_VUS (default 12), STRESS_MS (CPU burned per heavy request, default 25),
 //                  HOLD (peak duration, default 4m), COOLDOWN (trickle duration, default 4m)
 //
 // Request mix per iteration: ~60% list, ~20% get-by-id, ~20% CPU-heavy /api/stress.
-// Think-time is short so a modest number of VUs produces sustained CPU pressure on a single 100m-request Pod.
+// Think-time is short so a modest number of VUs produces sustained CPU pressure on a single 200m-request Pod.
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { Rate } from 'k6/metrics';
 
 const BASE = __ENV.BASE_URL || 'http://localhost:8080';
-const PEAK = parseInt(__ENV.PEAK_VUS || '25');
+const PEAK = parseInt(__ENV.PEAK_VUS || '12');
 const STRESS_MS = parseInt(__ENV.STRESS_MS || '25');
 const HOLD = __ENV.HOLD || '4m';
 const COOLDOWN = __ENV.COOLDOWN || '4m';

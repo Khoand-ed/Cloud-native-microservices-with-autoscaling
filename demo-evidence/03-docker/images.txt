@@ -1,0 +1,5 @@
+﻿IMAGE                     ID             DISK USAGE   CONTENT SIZE   EXTRA
+api-gateway:0.1.0         8e1756a42720        235MB         56.1MB        
+api-gateway:dev           be0dd7f1cc6b        235MB         56.1MB        
+catalogue-service:0.1.0   c71b55a55e46        252MB         60.5MB        
+catalogue-service:dev     fe07694f2361        252MB         60.5MB        

@@ -1,0 +1,60 @@
+﻿Name:                                                  shop-catalogue
+Namespace:                                             demo
+Labels:                                                app.kubernetes.io/instance=shop
+                                                       app.kubernetes.io/managed-by=Helm
+                                                       app.kubernetes.io/name=catalogue
+                                                       app.kubernetes.io/part-of=catalogue-app
+                                                       helm.sh/chart=catalogue-app-0.1.0
+Annotations:                                           meta.helm.sh/release-name: shop
+                                                       meta.helm.sh/release-namespace: demo
+CreationTimestamp:                                     Sat, 10 Oct 2026 01:45:33 +0700
+Reference:                                             Deployment/shop-catalogue
+Metrics:                                               ( current / target )
+  resource cpu on pods  (as a percentage of request):  4% (8m) / 50%
+Min replicas:                                          1
+Max replicas:                                          6
+Behavior:
+  Scale Up:
+    Stabilization Window: 0 seconds
+    Select Policy: Max
+    Policies:
+      - Type: Pods     Value: 4    Period: 15 seconds
+      - Type: Percent  Value: 100  Period: 15 seconds
+  Scale Down:
+    Stabilization Window: 60 seconds
+    Select Policy: Max
+    Policies:
+      - Type: Percent  Value: 100  Period: 15 seconds
+Deployment pods:       2 current / 2 desired
+Conditions:
+  Type            Status  Reason               Message
+  ----            ------  ------               -------
+  AbleToScale     True    ScaleDownStabilized  recent recommendations were higher than current one, applying the highest recent recommendation
+  ScalingActive   True    ValidMetricFound     the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
+  ScalingLimited  False   DesiredWithinRange   the desired count is within the acceptable range
+  ScaledToZero    False   NotScaledToZero      the HPA controller did not scale the workload to zero
+
+
+Name:                                                  shop-gateway
+Namespace:                                             demo
+Labels:                                                app.kubernetes.io/instance=shop
+                                                       app.kubernetes.io/managed-by=Helm
+                                                       app.kubernetes.io/name=gateway
+                                                       app.kubernetes.io/part-of=catalogue-app
+                                                       helm.sh/chart=catalogue-app-0.1.0
+Annotations:                                           meta.helm.sh/release-name: shop
+                                                       meta.helm.sh/release-namespace: demo
+CreationTimestamp:                                     Sat, 10 Oct 2026 01:45:33 +0700
+Reference:                                             Deployment/shop-gateway
+Metrics:                                               ( current / target )
+  resource cpu on pods  (as a percentage of request):  2% (5m) / 60%
+Min replicas:                                          1
+Max replicas:                                          4
+Deployment pods:                                       3 current / 3 desired
+Conditions:
+  Type            Status  Reason               Message
+  ----            ------  ------               -------
+  AbleToScale     True    ScaleDownStabilized  recent recommendations were higher than current one, applying the highest recent recommendation
+  ScalingActive   True    ValidMetricFound     the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
+  ScalingLimited  False   DesiredWithinRange   the desired count is within the acceptable range
+  ScaledToZero    False   NotScaledToZero      the HPA controller did not scale the workload to zero

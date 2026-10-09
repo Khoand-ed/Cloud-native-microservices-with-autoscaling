@@ -93,6 +93,20 @@ k6 run load-tests/smoke.js                      # kiểm tra nhanh 10 giây
 Tham số k6 (biến môi trường): `PEAK_VUS`, `STRESS_MS`, `HOLD`, `COOLDOWN`, `BASE_URL`.
 Kết quả lưu tại `demo-evidence/07-k6-results/<thời-gian>-<nhãn>/` (console, summary, `scaling.csv`, kubectl trước/sau).
 
+## Kết quả kiểm chứng trên máy phát triển
+
+Chạy `hpa-ramp.js` (HOLD=3m, COOLDOWN=3m, 12 VU) trên cluster kind 3 node — chi tiết ở `demo-evidence/07-k6-results/*-validation/`:
+
+| Chỉ số | Giá trị |
+|---|---|
+| Catalogue replicas | 1 → 3 → 4 → 6 (đạt `maxReplicas`), sau khi tải giảm còn 2 |
+| Gateway replicas | 1 → 2 → 3 |
+| CPU trung bình Catalogue ở đỉnh | ~45–47% (ngưỡng 50%) sau khi scale; ~114% lúc bắt đầu |
+| Request | 26 198 (~53 req/s trung bình), 0% lỗi |
+| Latency p95 / max | 84 ms / 205 ms |
+
+Ghi chú: giá trị phụ thuộc cấu hình máy; chỉnh `PEAK_VUS`, `STRESS_MS` nếu HPA không đạt/vượt mức mong muốn. Scale-in có độ trễ do `scaleDownStabilizationSeconds=60` và chu kỳ HPA 15 s.
+
 ## Dọn dẹp
 
 ```powershell

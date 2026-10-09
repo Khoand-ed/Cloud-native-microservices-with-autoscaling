@@ -1,0 +1,3 @@
+﻿NAME             REQUESTS                     LIMITS
+shop-catalogue   map[cpu:200m memory:128Mi]   map[cpu:500m memory:256Mi]
+shop-gateway     map[cpu:200m memory:96Mi]    map[cpu:400m memory:192Mi]

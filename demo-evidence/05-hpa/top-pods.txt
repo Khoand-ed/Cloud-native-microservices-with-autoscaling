@@ -1,0 +1,7 @@
+﻿NAME                             CPU(cores)   MEMORY(bytes)   
+shop-catalogue-f8dcb5b5c-q97h4   12m          49Mi            
+shop-catalogue-f8dcb5b5c-vx4lc   4m           43Mi            
+shop-gateway-7fb6bb7f6c-44h82    3m           38Mi            
+shop-gateway-7fb6bb7f6c-79tbz    3m           39Mi            
+shop-gateway-7fb6bb7f6c-fvlqt    10m          39Mi            
+shop-postgres-0                  11m          46Mi            

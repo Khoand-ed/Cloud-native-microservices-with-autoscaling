@@ -1,0 +1,5 @@
+﻿GET /api/products?limit=3
+{"items":[{"id":1,"sku":"SKU-0001","name":"Phone Model 1","category":"mobile","price":17.31,"stock":13},{"id":2,"sku":"SKU-0002","name":"Headset Model 2","category":"audio","price":24.62,"stock":26},{"id":3,"sku":"SKU-0003","name":"Keyboard Model 3","category":"accessories","price":31.93,"stock":39}],"limit":3,"offset":0}
+
+GET /api/products/1
+{"id":1,"sku":"SKU-0001","name":"Phone Model 1","category":"mobile","price":17.31,"stock":13}

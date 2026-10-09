@@ -1,0 +1,6 @@
+﻿
+k6 summary
+  requests:        26198 (53.5/s)
+  failed requests: 0.00 %
+  latency avg/p90/p95/max: 25 ms / 65 ms / 84 ms / 205 ms
+  peak VUs:        12

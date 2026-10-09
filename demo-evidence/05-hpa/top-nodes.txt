@@ -1,0 +1,4 @@
+﻿NAME                           CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+autoscale-demo-control-plane   190m         1%       1235Mi          15%         
+autoscale-demo-worker          10510m       87%      1244Mi          15%         
+autoscale-demo-worker2         97m          0%       1042Mi          13%         

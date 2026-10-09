@@ -1,0 +1,12 @@
+﻿NAME                             READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                    SELECTOR
+deployment.apps/shop-catalogue   1/1     1            1           36m   catalogue    catalogue-service:0.1.0   app.kubernetes.io/instance=shop,app.kubernetes.io/name=catalogue
+deployment.apps/shop-gateway     1/1     1            1           36m   gateway      api-gateway:0.1.0         app.kubernetes.io/instance=shop,app.kubernetes.io/name=gateway
+
+NAME                                                 REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/shop-catalogue   Deployment/shop-catalogue   cpu: 2%/50%   1         6         1          36m
+horizontalpodautoscaler.autoscaling/shop-gateway     Deployment/shop-gateway     cpu: 1%/60%   1         4         4          36m
+
+NAME                                 READY   STATUS    RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+pod/shop-catalogue-f8dcb5b5c-q97h4   1/1     Running   0          5m17s   10.244.2.19   autoscale-demo-worker2   <none>           <none>
+pod/shop-gateway-7fb6bb7f6c-fvlqt    1/1     Running   0          5m17s   10.244.2.20   autoscale-demo-worker2   <none>           <none>
+pod/shop-postgres-0                  1/1     Running   0          36m     10.244.2.4    autoscale-demo-worker2   <none>           <none>

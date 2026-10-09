@@ -1,0 +1,5 @@
+﻿NAME                                                        READY   STATUS    RESTARTS     AGE   IP           NODE                     NOMINATED NODE   READINESS GATES
+kps-operator-d475bbcd8-qdsbk                                1/1     Running   0            42m   10.244.2.5   autoscale-demo-worker2   <none>           <none>
+kube-prometheus-stack-grafana-78b97dfc6d-xrdqd              2/3     Running   1 (8s ago)   42m   10.244.1.6   autoscale-demo-worker    <none>           <none>
+kube-prometheus-stack-kube-state-metrics-78dc75b868-xxwvs   1/1     Running   0            42m   10.244.1.5   autoscale-demo-worker    <none>           <none>
+prometheus-kps-prometheus-0                                 2/2     Running   0            42m   10.244.2.6   autoscale-demo-worker2   <none>           <none>

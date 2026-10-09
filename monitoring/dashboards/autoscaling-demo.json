@@ -276,7 +276,7 @@
       "id": 5,
       "type": "timeseries",
       "title": "CPU usage per Pod (cores)",
-      "description": "Limit is 0.5 core for catalogue and 0.25 for gateway.",
+      "description": "CPU limits: 0.5 core per catalogue Pod, 0.4 per gateway Pod; requests are 0.2 each.",
       "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
