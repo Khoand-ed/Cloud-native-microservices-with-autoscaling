@@ -1,0 +1,31 @@
+# secrets / credentials
+.env
+*.pem
+*.key
+kubeconfig*
+.kube/
+.aws/
+credentials
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# k6 / evidence raw output (keep README + curated files)
+demo-evidence/**/*.json
+demo-evidence/09-recordings/*
+!demo-evidence/09-recordings/.gitkeep
+
+# helm
+charts/**/charts/*.tgz
+*.tgz
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.claude/
