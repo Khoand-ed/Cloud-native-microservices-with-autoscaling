@@ -29,3 +29,6 @@ Thumbs.db
 .idea/
 .vscode/
 .claude/
+
+# downloaded CLI binaries (see scripts/setup-tools.ps1)
+tools/

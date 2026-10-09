@@ -1,0 +1,16 @@
+# 1 control-plane + 2 workers => genuine multi-node scheduling for the demo.
+# Host ports are published straight from the node containers, so no port-forward is needed:
+#   http://localhost:8080  API gateway   (NodePort 30080)
+#   http://localhost:3000  Grafana       (NodePort 30300)
+#   http://localhost:9090  Prometheus    (NodePort 30900)
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: autoscale-demo
+nodes:
+  - role: control-plane
+    extraPortMappings:
+      - { containerPort: 30080, hostPort: 8080, listenAddress: "127.0.0.1" }
+      - { containerPort: 30300, hostPort: 3000, listenAddress: "127.0.0.1" }
+      - { containerPort: 30900, hostPort: 9090, listenAddress: "127.0.0.1" }
+  - role: worker
+  - role: worker
